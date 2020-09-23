@@ -33,8 +33,8 @@ export default {
   },
   created() {
     db.collection('smoothies').get()
-      .then(snapshot => {
-        snapshot.forEach(doc => {
+      .then(res => {
+        res.forEach(doc => {
           console.log(doc.data());
         });
       });
