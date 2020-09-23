@@ -15,26 +15,29 @@
 </template>
 
 <script>
+import db from '@/firebase/init';
+
 export default {
   name: 'Index',
   data() {
     return {
-      smoothies: [
-        {
-          title: 'Bread', slug: 'its-bread', ingredients: ['milk', 'wheat', 'eggs', 'cheese'], id: 1,
-        },
-        {
-          title: 'Morning Mood', slug: 'morning-mood', ingredients: ['mango', 'lime', 'juice', 'lemon'], id: 2,
-        },
-      ],
+      smoothies: [],
     };
   },
   methods: {
     deleteSmoothie(id) {
       this.smoothies = this.smoothies.filter(smoothie => {
-        return smoothie.id !== id
-      })
+        return smoothie.id !== id;
+      });
     },
+  },
+  created() {
+    db.collection('smoothies').get()
+      .then(snapshot => {
+        snapshot.forEach(doc => {
+          console.log(doc.data());
+        });
+      });
   },
 };
 </script>
