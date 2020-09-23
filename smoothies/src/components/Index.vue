@@ -35,7 +35,9 @@ export default {
     db.collection('smoothies').get()
       .then(res => {
         res.forEach(doc => {
-          console.log(doc.data());
+          const smoothie = doc.data();
+          smoothie.id = doc.id;
+          this.smoothies.push(smoothie);
         });
       });
   },
