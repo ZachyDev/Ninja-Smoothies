@@ -33,11 +33,10 @@ export default {
   },
   created() {
     db.collection('smoothies').get()
-      .then(res => {
-        res.forEach(doc => {
-          const smoothie = doc.data();
-          smoothie.id = doc.id;
-          this.smoothies.push(smoothie);
+      .then(snapshot => {
+        snapshot.forEach(doc => {
+          const dataFetched = doc.data();
+          this.smoothies.push(dataFetched);
         });
       });
   },
