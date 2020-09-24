@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import db from '@/firebase/init';
+import firestoreDb from '@/firebase/init';
 
 export default {
   name: 'Index',
@@ -32,14 +32,15 @@ export default {
     },
   },
   created() {
-    db.collection('smoothies').get()
+    firestoreDb.collection('smoothies').get()
       .then(snapshot => {
         snapshot.forEach(doc => {
-          const dataFetched = doc.data();
-          this.smoothies.push(dataFetched);
+          const fetchedData = doc.data();
+          this.smoothies.push(fetchedData);
         });
       });
   },
+
 };
 </script>
 
