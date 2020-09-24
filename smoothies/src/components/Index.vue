@@ -26,17 +26,22 @@ export default {
   },
   methods: {
     deleteSmoothie(id) {
-      this.smoothies = this.smoothies.filter(smoothie => {
-        return smoothie.id !== id;
-      });
+      // delete data from firestore
+      firestoreDb.collection('smoothies').doc(id).delete()
+        .then(() => {
+          this.smoothies = this.smoothies.filter(smoothie => {
+            return smoothie.id !== id;
+          });
+        });
     },
   },
   created() {
     firestoreDb.collection('smoothies').get()
       .then(snapshot => {
         snapshot.forEach(doc => {
-          const fetchedData = doc.data();
-          this.smoothies.push(fetchedData);
+          const smoothie = doc.data();
+          smoothie.id = doc.id;
+          this.smoothies.push(smoothie);
         });
       });
   },
