@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Index from '../components/Index.vue';
-import Home from '../components/Home.vue';
+import Index from '@/components/Index.vue';
+import AddSmoothie from '@/components/AddSmoothie.vue';
 
 Vue.use(VueRouter);
 
@@ -12,10 +12,11 @@ const routes = [
     component: Index,
   },
   {
-    path: '/home',
-    name: 'home',
-    component: Home,
+    path: '/add-smoothie',
+    name: 'AddSmoothie',
+    component: AddSmoothie,
   },
+
 ];
 
 const router = new VueRouter({
